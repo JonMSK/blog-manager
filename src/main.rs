@@ -1,15 +1,14 @@
 //#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-use std::fs;
-use eframe::egui;
-use std::io::prelude::*;
+#![feature(string_remove_matches)]
 
-pub mod standard;
+pub mod buttons;
 
 fn main() {
     let options = eframe::NativeOptions::default();
-    eframe::run_native("github.com", options, Box::new(|_cc| Box::new(MyApp::default())));
+    eframe::run_native("github.com", options, Box::new(|_cc| Box::new(buttons::MyApp::default())));
 }
 
+/*
 struct MyApp {
     content: String,
     file_name: String
@@ -52,6 +51,7 @@ impl eframe::App for MyApp {
 </body>", self.content)
                             .expect("Failed to write to post file");
                     }
+
                     if ui.button("Update index.html").clicked() {
                         // Update the index.html file.
                         let mut out = fs::File::create("E:/Programming/Web/git_blog/website/index.html").unwrap();
@@ -77,6 +77,13 @@ impl eframe::App for MyApp {
 </body>", stringlist)
                         .expect("Failed to write to post file");
                     }
+                    
+                    if ui.button("Push to the internet!").clicked() {
+                        Command::new("cmd")
+                            .args(["/C", "bash update.sh"])
+                            .output()
+                            .expect("Failed to execute command.");
+                    }
                 });
 
                 //ui.text_edit_multiline(&mut self.content);
@@ -85,3 +92,4 @@ impl eframe::App for MyApp {
         });
     }
 }
+*/
